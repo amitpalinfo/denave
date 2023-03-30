@@ -88,6 +88,24 @@ export const FilterData = (
 
   let temparray = [...denave];
 
+  let queryParams='';
+
+  filters
+    .filter((dataFilter) => dataFilter.values.length > 0)
+    .forEach((item) => {
+      queryParams += `${item.type}=${encodeURIComponent(item.values.toString())}&`;
+    });
+
+  console.log("queryParams",queryParams)  
+
+  fetch(`http://localhost:5000/getdata?${queryParams}`, {
+  method: 'GET',
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
+
+
   filters
     .filter((dataFilter) => dataFilter.values.length > 0)
     .map(

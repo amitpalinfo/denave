@@ -70,6 +70,10 @@ export default function Overview() {
 
   const closeModal = () => {
     setModalIsOpen(!modalIsOpen);
+    setSuccessMsg({
+      status:false,
+      msg:null
+    } )
   };
   const [formState, setFormState] = useState({
     client_name: '',
@@ -93,6 +97,23 @@ export default function Overview() {
     setSuccessMsg({
       status:true,
       msg:"Your downlaod request is submitted successfully!. We will update soon with dowload link to your email "    })
+
+      fetch('http://localhost:5000/getdata', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"ddd":22
+          // your data to send
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // do something with the response data
+      })
+      .catch(error => {
+        console.error(error)
+      });
   };
 
   return (
@@ -104,22 +125,22 @@ export default function Overview() {
       <form className="get_data_form" onSubmit={handleSubmit}>
       <label>
         Client Name
-       <input type="text" value={formState.client_name} name={"client_name"} className="form_label" onChange={handleInputChange}  />
+       <input type="text" value={formState.client_name} name={"client_name"} className="form_label" onChange={handleInputChange}  required />
       </label>
       <br />
       <label>
       Project Name
-        <input type="text" value={formState.project_name} name={"project_name"} className="form_label" onChange={handleInputChange}  />
+        <input type="text" value={formState.project_name} name={"project_name"} className="form_label" onChange={handleInputChange} required  />
       </label>
       <br />
       <label>
       Product Name
-        <input type="text" value={formState.product_name} name={"product_name"} className="form_label" onChange={handleInputChange} />
+        <input type="text" value={formState.product_name} name={"product_name"} className="form_label" onChange={handleInputChange}  />
       </label>
       <br />
       <label>
       Purpose
-      <select name="purpose" className="form_label" onChange={handleInputChange} >
+      <select name="purpose" className="form_label" onChange={handleInputChange} required >
         <option value="">Select an option</option>
         <option value="Telecalling">Telecalling</option>
         <option value="Digital Marketing">Digital Marketing</option>
@@ -127,6 +148,16 @@ export default function Overview() {
         <option value="Lead Generation">Lead Generation</option>
         <option value="Email Marketing Campaign">Email Marketing Campaign</option>
         <option value="Others">Others</option>
+      </select>
+      </label>
+      <br />
+      <label>
+      Type of download
+      <select name="purpose" className="form_label" onChange={handleInputChange} required >
+        <option value="">Select an option</option>
+        <option value="Prospecting">Prospecting</option>
+        <option value="Delivery">Delivery</option>
+        
       </select>
       </label>
       <br />

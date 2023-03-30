@@ -35,16 +35,16 @@ export default function Sidebar() {
     (state) => state.denave
   );
 
-  useEffect(()=>{
-    setIndustryFilter(industryDataFilter);
-    setDropDown((dropdown) => {
-      return {
-        ...dropdown,
-        Industry: !dropdown.Industry,
-      };
-    })
+  // useEffect(()=>{
+  //   setIndustryFilter(industryDataFilter);
+  //   setDropDown((dropdown) => {
+  //     return {
+  //       ...dropdown,
+  //       Industry: !dropdown.Industry,
+  //     };
+  //   })
 
-  },[industryDataFilter])
+  // },[industryDataFilter])
 
   const handleChange = (c) => () => {
     // return the first index or -1
